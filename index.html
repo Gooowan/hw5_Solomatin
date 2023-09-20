@@ -2,15 +2,41 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <script src="scripts/functions.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Book Library</title>
+    <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
-
-<button id="createTableButton">Create Table</button>
-
-<table id="myTable" style="width: 90%; height: 400px"></table>
-
-<!--<script>createTableWithBorders(3,3)</script>-->
+<header>
+    <h1>My Book Library</h1>
+</header>
+<main>
+    <div class="left-column">
+        <section id="discover">
+            <h2>Discover Unread Books</h2>
+            <ul id="unreadBooks"></ul>
+        </section>
+        <section id="library">
+            <h2>My Library</h2>
+            <ul id="bookList"></ul>
+        </section>
+    </div>
+    <div class="right-column">
+        <section id="addBook">
+            <h2>Add a New Book</h2>
+                <form id="bookForm">
+                    <input type="text" id="title" placeholder="Title" required>
+                    <input type="text" id="authors" placeholder="Authors" required>
+                    <input type="number" id="pages" placeholder="Number of Pages" required>
+                    <label for="isRead">Read?</label>
+                    <input type="checkbox" id="isRead">
+                    <label for="isFavorite">Favorite?</label>
+                    <input type="checkbox" id="isFavorite">
+                    <button type="submit">Add Book</button>
+                </form>
+        </section>
+    </div>
+</main>
+<script src="script.js"></script>
 </body>
 </html>
