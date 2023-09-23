@@ -8,35 +8,39 @@
 </head>
 <body>
 <header>
-    <h1>My Book Library</h1>
+    <h1>Drake Book Library</h1>
 </header>
 <main>
-    <div class="left-column">
-        <section id="discover">
-            <h2>Discover Unread Books</h2>
+    <div class="left-column" >
+        <h2>Discover Unread Books</h2>
+        <section id="discover" class="scrollable-container">
             <ul id="unreadBooks"></ul>
         </section>
-        <section id="library">
-            <h2>My Library</h2>
+        <h2>My Library</h2>
+        <section id="library" class="scrollable-container">
             <ul id="bookList"></ul>
         </section>
     </div>
     <div class="right-column">
         <section id="addBook">
             <h2>Add a New Book</h2>
-                <form id="bookForm">
-                    <input type="text" id="title" placeholder="Title" required>
-                    <input type="text" id="authors" placeholder="Authors" required>
-                    <input type="number" id="pages" placeholder="Number of Pages" required>
+            <form id="bookForm">
+                <input type="text" id="title" placeholder="Title" required>
+                <input type="text" id="authors" placeholder="Authors" required>
+                <input type="number" id="pages" placeholder="Number of Pages" required>
+                <div class="checkbox-container">
+                    <input type="checkbox" id="isRead" class="checkbox">
                     <label for="isRead">Read?</label>
-                    <input type="checkbox" id="isRead">
+                </div>
+                <div class="checkbox-container">
+                    <input type="checkbox" id="isFavorite" class="checkbox">
                     <label for="isFavorite">Favorite?</label>
-                    <input type="checkbox" id="isFavorite">
-                    <button type="submit">Add Book</button>
-                </form>
+                </div>
+                <button type="submit">Add Book</button>
+            </form>
         </section>
     </div>
 </main>
-<script src="script.js"></script>
+<script src="scripts/classes.js"></script>
 </body>
 </html>
