@@ -14,18 +14,18 @@
     <div class="left-column" >
         <h2>Discover Unread Books</h2>
         <section id="discover" class="scrollable-container">
-            <ul id="unreadBooks"></ul>
+            <ul id="unreadBooks" class="library"></ul>
         </section>
         <h2>My Library</h2>
         <section id="library" class="scrollable-container">
-            <ul id="bookList"></ul>
+            <ul id="bookList" class="library"></ul>
         </section>
     </div>
     <div class="right-column">
         <section id="addBook">
             <h2>Add a New Book</h2>
             <form id="bookForm">
-                <input type="text" id="title" placeholder="Title" required>
+                <input type="text" id="title" placeholder="Title"  required>
                 <input type="text" id="authors" placeholder="Authors" required>
                 <input type="number" id="pages" placeholder="Number of Pages" required>
                 <div class="checkbox-container">
@@ -33,7 +33,7 @@
                     <label for="isRead">Read?</label>
                 </div>
                 <div class="checkbox-container">
-                    <input type="checkbox" id="isFavorite" class="checkbox">
+                    <input type="checkbox" id="isFavorite" class="checkbox-style">
                     <label for="isFavorite">Favorite?</label>
                 </div>
                 <button type="submit">Add Book</button>
