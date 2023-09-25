@@ -36,6 +36,14 @@ class Bookshelf {
         return this.books.filter(book => book.isFavorite);
     }
 
+    countFavoriteBooks() {
+        return this.getFavoriteBooks().length;
+    }
+
+    countUnreadBooks() {
+        return this.getUnreadBooks().length;
+    }
+
     displayUnreadBooks() {
         const unreadBooks = this.getUnreadBooks();
         const unreadBooksList = document.getElementById("unreadBooks");
@@ -60,7 +68,15 @@ class Bookshelf {
             listItem.textContent = `${book.title} by ${book.authors} (${book.isRead ? "Read" : "Unread"})`;
             bookList.appendChild(listItem);
         });
+
+        // Display count of favorite and unread books
+        const favoriteCount = document.getElementById("favoriteCount");
+        favoriteCount.textContent = `Number of favorite books: ${this.countFavoriteBooks()}`;
+
+        const unreadCount = document.getElementById("unreadCount");
+        unreadCount.textContent = `Number of unread books: ${this.countUnreadBooks()}`;
     }
+
 }
 
 // Create a Bookshelf instance
