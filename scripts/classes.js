@@ -65,7 +65,7 @@ class Bookshelf {
 
         library.forEach(book => {
             const listItem = document.createElement("li");
-            listItem.textContent = `${book.title} by ${book.authors} (${book.isRead ? "Read" : "Unread"})`;
+            listItem.textContent = `${book.title} by ${book.authors} (${book.isRead ? "Read" : "Unread"}) (${book.isFavorite ? "Favourite" : "Not Favourite"})`;
             bookList.appendChild(listItem);
         });
 
