@@ -1,4 +1,3 @@
-// Class definitions
 class Book {
     constructor(title, authors, numberOfPages, isRead, isFavorite) {
         this.title = title;
@@ -8,8 +7,8 @@ class Book {
         this.isFavorite = isFavorite;
     }
 
-    markAsRead() {
-        this.isRead = true;
+    markAsReadToggle() {
+        this.isRead = !this.isRead;
     }
 
     toggleFavorite() {
@@ -24,6 +23,12 @@ class Bookshelf {
 
     addBook(book) {
         this.books.push(book);
+        this.displayUnreadBooks();
+        this.displayLibrary();
+    }
+
+    removeBook(title) {
+        this.books = this.books.filter(book => book.title !== title);
         this.displayUnreadBooks();
         this.displayLibrary();
     }
@@ -60,29 +65,52 @@ class Bookshelf {
     displayLibrary() {
         const library = this.books;
         const bookList = document.getElementById("bookList");
-
         bookList.innerHTML = ""; // Clear previous list
 
-        library.forEach(book => {
+        library.forEach((book, index) => {
             const listItem = document.createElement("li");
             listItem.textContent = `${book.title} by ${book.authors} (${book.isRead ? "Read" : "Unread"}) (${book.isFavorite ? "Favourite" : "Not Favourite"})`;
+
+            const readButton = document.createElement("button");
+            readButton.textContent = book.isRead ? "Mark as Unread" : "Mark as Read";
+            readButton.addEventListener('click', () => {
+                book.markAsReadToggle();
+                this.displayUnreadBooks();
+                this.displayLibrary();
+            });
+
+            const favoriteButton = document.createElement("button");
+            favoriteButton.textContent = book.isFavorite ? "Remove from Favorites" : "Add to Favorites";
+            favoriteButton.addEventListener('click', () => {
+                book.toggleFavorite();
+                this.displayUnreadBooks();
+                this.displayLibrary();
+            });
+
+            const removeButton = document.createElement("button");
+            removeButton.textContent = "Remove from Library";
+            removeButton.addEventListener('click', () => {
+                this.removeBook(book.title);
+                this.displayUnreadBooks();
+                this.displayLibrary();
+            });
+
+            listItem.appendChild(readButton);
+            listItem.appendChild(favoriteButton);
+            listItem.appendChild(removeButton);
             bookList.appendChild(listItem);
         });
 
-        // Display count of favorite and unread books
         const favoriteCount = document.getElementById("favoriteCount");
         favoriteCount.textContent = `Number of favorite books: ${this.countFavoriteBooks()}`;
 
         const unreadCount = document.getElementById("unreadCount");
         unreadCount.textContent = `Number of unread books: ${this.countUnreadBooks()}`;
     }
-
 }
 
-// Create a Bookshelf instance
 const myBookshelf = new Bookshelf();
 
-// Event listener for adding a new book
 const bookForm = document.getElementById("bookForm");
 bookForm.addEventListener("submit", function(e) {
     e.preventDefault();
@@ -95,7 +123,6 @@ bookForm.addEventListener("submit", function(e) {
 
     const newBook = new Book(title, authors, pages, isRead, isFavorite);
 
-    // Send the new book data to the API
     fetch('https://jsonplaceholder.typicode.com/posts', {
         method: 'POST',
         headers: {
@@ -109,18 +136,15 @@ bookForm.addEventListener("submit", function(e) {
     })
         .then(response => response.json())
         .then(data => {
-            myBookshelf.addBook(newBook); // Add the new book to the bookshelf
+            myBookshelf.addBook(newBook);
         })
         .catch(error => {
             console.error('Error adding new book:', error);
         });
 
-    // Clear form fields
     document.getElementById("title").value = "";
     document.getElementById("authors").value = "";
     document.getElementById("pages").value = "";
     document.getElementById("isRead").checked = false;
     document.getElementById("isFavorite").checked = false;
 });
-
-
